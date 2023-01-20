@@ -1,34 +1,36 @@
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import initFirebase from '../config';
-import { setUserCookie } from '../auth/userCookie';
-import { mapUserData } from '../auth/useUser';
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import initFirebase from "../firebase/clientApp";
+import { setUserCookie } from "../auth/userCookie";
+import { mapUserData } from "../auth/useUser";
 
 initFirebase();
 const firebaseAuthConfig = ({ signInSuccessUrl }) => ({
-  signInFlow: 'popup',
+  signInFlow: "popup",
   signInOptions: [
     {
       provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      requireDisplayName: false
+      requireDisplayName: false,
     },
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
   ],
   signInSuccessUrl,
-  credentialHelper: 'none',
+  credentialHelper: "none",
   callbacks: {
     signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
       const userData = await mapUserData(user);
       setUserCookie(userData);
-    }
-  }
+    },
+  },
 });
 
 const FirebaseAuth = () => {
-  const signInSuccessUrl = "/private"
+  const signInSuccessUrl = "/private";
   return (
-    <div>
+    <div className="">
+      <div className=" font-bold ">mama</div>
+
       <StyledFirebaseAuth
         uiConfig={firebaseAuthConfig({ signInSuccessUrl })}
         firebaseAuth={firebase.auth()}
