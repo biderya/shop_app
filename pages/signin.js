@@ -28,8 +28,8 @@ const firebaseAuthConfig = ({ signInSuccessUrl }) => ({
 const FirebaseAuth = () => {
   const signInSuccessUrl = "/private";
   return (
-    <div className="">
-      <div className=" font-bold ">mama</div>
+    <div className="bg-black h-screen w-screen">
+      <div className=" text-3xl font-bold underline ">mama</div>
 
       <StyledFirebaseAuth
         uiConfig={firebaseAuthConfig({ signInSuccessUrl })}
